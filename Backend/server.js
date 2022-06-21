@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "production") {
 
 // --------------------------deployment------------------------------
 
-app.use(notFound)
+app.use(notFound) 
 app.use(errorHandler)
 
 
@@ -66,7 +66,7 @@ io.on("connection", (socket) =>{
         socket.join(userData._id);
         console.log(userData._id);
         socket.emit("connected")
-    });
+    }); 
 
     socket.on('join chat', (room)=>{
         socket.join(room);

@@ -115,7 +115,7 @@ const SideDrawer = () => {
         </Tooltip>
 
         <Text fontSize='2xl' fontFamily="work sans">
-          Talk-A-Tive
+          Mern-Chat-App
         </Text>
         <div>
           <Menu>
@@ -184,7 +184,7 @@ const SideDrawer = () => {
               />
             ))
           )}
-          {loadingChat && <Spinner ml="auto" display={"flex"}/>}
+          {loadingChat && <Spinner mr={130} ml="auto" display={"flex"}/>}
         </DrawerBody>
         </DrawerContent>
        </Drawer>

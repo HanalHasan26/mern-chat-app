@@ -31,7 +31,7 @@ const history =useHistory();
         fontFamily="Work sans"
         color='black'
         textAlign={"center"}
-        >Talk-A-Tive</Text>
+        >Mern-Chat-App</Text>
       </Box>
       <Box bg={'white'} w='100%' p={'4'} borderRadius='10px' color={'black'} borderWidth={'1px'}>
       <Tabs variant='soft-rounded'>

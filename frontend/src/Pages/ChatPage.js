@@ -6,9 +6,8 @@ import SideDrawer from '../Components/Authentication/miscellaneous/SideDrawer'
 import ChatBox from '../Components/Authentication/miscellaneous/ChatBox'
 
 function ChatPage() {
-
-const { user } = ChatState();
 const [fetchAgain, setFetchAgain] = useState()
+const { user } = ChatState();
 
   return (
 
@@ -23,4 +22,4 @@ const [fetchAgain, setFetchAgain] = useState()
   );
 };
 
-export default ChatPage
+export default ChatPage 

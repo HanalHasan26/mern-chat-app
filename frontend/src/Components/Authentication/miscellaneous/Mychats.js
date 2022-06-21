@@ -11,9 +11,21 @@ import GroupChatModal from './GroupChatModal';
 const Mychats = ({fetchAgain}) => {
 
   const [loggedUser, setLoggedUser] = useState()
+  const [loading, setLoading] = useState(true)
+  
+
   const { user,selectedChat ,setSelectedChat, chats, setChats} = ChatState();
 
+
   const toast = useToast()
+
+  setTimeout(()=> {
+      setLoading(false)
+  }, 1500);
+
+
+
+
   const fetchChats = async () => {
     
     try {
@@ -83,7 +95,8 @@ const Mychats = ({fetchAgain}) => {
         h="100%"
         borderRadius={"10px"}
         overflow="hidden"
-        >
+        > 
+        {loading && (<ChatLoading/>)}
             {chats ?(
               <Stack overflowY={"scroll"}>
                 {chats.map((chat)=>(
@@ -114,7 +127,9 @@ const Mychats = ({fetchAgain}) => {
                     </Box>    
                 ))}
               </Stack>
-            ) : <ChatLoading/>} 
+            ) : (
+            <ChatLoading />
+            )} 
         </Box>
     </Box>
   )
