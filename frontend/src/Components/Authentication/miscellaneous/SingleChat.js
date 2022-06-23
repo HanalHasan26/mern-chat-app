@@ -37,7 +37,7 @@ const SingleChat = ({fetchAgain , setFetchAgain}) => {
       },
   };
 
-    const {user,  selectedChat, setSelectedChat, notification, setNotification ,chats}= ChatState()
+    const {user,  selectedChat, setSelectedChat, notification, setNotification }= ChatState()
     const toast = useToast()
 
     const fetchMessages = async ()=>{
@@ -147,29 +147,27 @@ const SingleChat = ({fetchAgain , setFetchAgain}) => {
 
     
 
-    const typingHandler = async (e) =>{
-        setNewMessage(e.target.value)
-
-        if(!socketConnected) return;
-
-        if(!typing){
-            setTyping(true)
-            socket.emit('typing', selectedChat._id);
+    const typingHandler = (e) => {
+      setNewMessage(e.target.value);
+  
+      if (!socketConnected) return;
+  
+      if (!typing) {
+        setTyping(true);
+        socket.emit("typing", selectedChat._id);
+      }
+      let lastTypingTime = new Date().getTime();
+      var timerLength = 3000;
+      setTimeout(() => {
+        var timeNow = new Date().getTime();
+        var timeDiff = timeNow - lastTypingTime;
+        if (timeDiff >= timerLength && typing) {
+          socket.emit("stop typing", selectedChat._id);
+          setTyping(false);
         }
-        let lastTypingTime = new Date().getTime()
-        var timerLength = 2000;
-        setTimeout(()=>{
-            var timeNow = new Date().getTime()
-            var timeDiff = timeNow - lastTypingTime;
+      }, timerLength);
 
-            if(timeDiff >= timerLength && typing){
-                socket.emit("stop typing",selectedChat._id)
-                setTyping(false);
-            }    
-        }, timerLength)
-
-     
-    }
+    };
 
   return (
     <>

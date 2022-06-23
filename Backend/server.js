@@ -73,8 +73,8 @@ io.on("connection", (socket) =>{
         console.log("user join room" + room);
     });
 
-    socket.on("typing", (room)=> socket.in(room).emit("typing"));
-    socket.on("stop typing", (room)=> socket.in(room).emit("stop typing"));
+    socket.on("typing", (room) => socket.in(room).emit("typing"));
+    socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));;
 
     socket.on("new message", (newMessageRecieved) => {
       var chat = newMessageRecieved.chat;
