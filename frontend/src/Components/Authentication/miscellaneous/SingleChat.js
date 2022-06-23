@@ -12,14 +12,7 @@ import io from "socket.io-client"
 import Lottie from 'react-lottie'
 import animationData from "../../../Animations/typing.json"
 
-const defaultOptions = {
-    loop:true,
-    autoplay:true,
-    animationData:animationData,
-    renderSettings: {
-        preserveAspectRatio: "xMidYMid slice",
-    },
-};
+
 
 const ENDPOINT = "https://mern-chat-app-byhanal.herokuapp.com/";
 var socket, selectedChatCompare;
@@ -34,6 +27,15 @@ const SingleChat = ({fetchAgain , setFetchAgain}) => {
     const [socketConnected, setSocketConnected] = useState(false)
     const [typing, setTyping] = useState(false)
     const [istyping, setIsTyping] = useState(false)
+
+    const defaultOptions = {
+      loop:true,
+      autoplay:true,
+      animationData:animationData,
+      renderSettings: {
+          preserveAspectRatio: "xMidYMid slice",
+      },
+  };
 
     const {user,  selectedChat, setSelectedChat, notification, setNotification ,chats}= ChatState()
     const toast = useToast()
@@ -83,23 +85,25 @@ const SingleChat = ({fetchAgain , setFetchAgain}) => {
      selectedChatCompare = selectedChat;
     }, [selectedChat])
 
-    console.log(chats[0],user);
+    console.log(message,"..............");
 
-    useEffect(() => {
-      socket.on("message recived", (newMessageRecived)=>{
-        if (!selectedChatCompare || selectedChatCompare._id !== newMessageRecived.chat._id){
 
-            if(!notification.includes(newMessageRecived)){
-                setNotification([newMessageRecived, ...notification])
-                setFetchAgain(!fetchAgain) 
+      useEffect(() => {
+        socket.on("message recieved", (newMessageRecieved) => {
+          if (
+            !selectedChatCompare || 
+            selectedChatCompare._id !== newMessageRecieved.chat._id
+          ) {
+            if (!notification.includes(newMessageRecieved)) {
+              setNotification([newMessageRecieved, ...notification]);
+              setFetchAgain(!fetchAgain);
             }
-
-        }else{
-            setMessage([...message, newMessageRecived])
-        }
+          } else {
+            setMessage([...message, newMessageRecieved]);
+          }
+        });
       });
-    })
-    
+
     
 
     const sendMessage = async(event)=>{
@@ -266,3 +270,4 @@ const SingleChat = ({fetchAgain , setFetchAgain}) => {
 }
 
 export default SingleChat
+

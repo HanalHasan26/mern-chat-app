@@ -22,7 +22,7 @@ const SideDrawer = () => {
   const { user ,setSelectedChat, chats, setChats, notification, setNotification} = ChatState();
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
-
+console.log(notification,"////////////////");
   const logoutHandler=()=>{
     localStorage.removeItem("userInfo");
     history.push("/")
